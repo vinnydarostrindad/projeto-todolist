@@ -13,19 +13,43 @@
 <body>
     
     <header class="header">
-        <h1>ToDo<span class="titleSpan">List</span></h1>
-        <img src="https://cdn.iconscout.com/icon/free/png-256/avatar-380-456332.png" alt="" class="avatar">
-        <span id="configConta">Conta</span>
-        <button id="navButton">|||</button>
-        <nav class="openedNav">
-            <button class="navButton">|||</button>
-            <h3 id="explainSite">Como funciona?</h3>
-            <h2>Listas</h2>
-            <ul class="list" id="lists"></ul>
-        </nav>
+        <div>
+            <img src="https://cdn.iconscout.com/icon/free/png-256/avatar-380-456332.png" alt="Avatar" class="avatar">
+        </div>
+        <h1>ToDo<span><img src="src/img/checkList.svg" alt="Check"> List</span></h1>
+        <button class="navButton" id="navButton"><img src="src/img/menuBurguer.svg" alt="Menu" class="navBurguer"></button>     
     </header>
+    <nav class="nav">
+        <h3 id="explainSite">Como funciona?</h3>
+        <h2>Listas</h2>
+        <ul class="lists" id="lists">
+            <li class="list" id="list">
+                <div>
+                    <img src="src/img/openArrow.svg" alt="abrir" id="openCloseList"><h3>Compras</h3>
+                </div>
+                <ul>
+                    <li>Ovo</li>
+                    <li>Suco de uva</li>
+                    <li>Maça</li>
+                    <li>Banana</li>
+                    <li>Chocolate</li>
+                </ul>
+            </li>
+        </ul>
+    </nav>
     <main>
-        <ul class="listsContainers"></ul>
+        <ul class="listsContainer">
+            <li>
+                <h3>Compras</h3>
+                <ul>
+                    <li>Ovo</li>
+                    <li>Suco de uva</li>
+                    <li>Maça</li>
+                    <li>Banana</li>
+                    <li>Chocolate</li>
+                </ul>
+            </li>
+        </ul>
         <button class="addList">+</button>
     </main>
 

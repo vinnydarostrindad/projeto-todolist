@@ -1,0 +1,96 @@
+@import url('https://fonts.googleapis.com/css2?family=Amatic+SC:wght@400;700&family=Nunito:wght@300;400;700&display=swap');
+
+$primaryColor: #7FC8F5;
+$secundaryColor: #60b1e2;
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-size: 16px;
+    font-family: 'Nunito', sans-serif;
+    background-color: #fafafa;
+    color: white;
+}
+
+ul {
+    list-style: none;
+}
+
+.header {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    background: $primaryColor;
+    height: 75px;
+    text-align: center;
+
+    div .avatar {
+        width: 50px;
+        margin-left: 10px;
+    }
+    
+    h1 span {
+        display: flex;
+        gap: 2px;
+        margin: -17px 0 0 31px;
+
+        img {
+            width: 24px;
+        }
+    }
+
+    & > :nth-child(1n) {
+        width: 110px;
+    }
+
+    .navButton {
+        border: none;
+        background-color: transparent;
+        text-align: right;
+        margin-right: 10px;
+    }
+    
+    .navBurguer {
+        width: 45px;
+    }
+}
+
+.nav {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 43%;
+    height: 100vh;
+    background-color: $primaryColor;
+
+    & > h3 {
+        width: 145px;
+        margin: 20px auto 10px;
+        background-color: #60b1e2;
+        border-radius: 7px;
+        text-align: center;
+    }
+
+    h2 {
+        margin-left: 5px;
+    }
+
+    .lists {
+        .list {
+            margin-left: 15px;
+
+            div {
+                display: flex;
+                gap: 5px;
+
+                img {
+                    width: 8px;
+                }
+            }
+        }
+    }
+}
