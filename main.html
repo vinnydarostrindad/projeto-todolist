@@ -19,23 +19,24 @@
         <h1>ToDo<span><img src="src/img/checkList.svg" alt="Check"> List</span></h1>
         <button class="navButton" id="navButton"><img src="src/img/menuBurguer.svg" alt="Menu" class="navBurguer"></button>     
     </header>
-    <nav class="nav">
+    <div id="closeNav"></div>
+    <nav class="nav display" id="nav">
         <div>
             <h3 id="explainSite">Como funciona?</h3>
-            <img src="src/img/config.svg" alt="Configuração">
+            <img src="src/img/config.svg" alt="Configuração" id="config">
         </div>
         <h2>Listas</h2>
         <ul class="lists" id="lists">
             <li class="list" id="list">
-                <div>
-                    <img src="src/img/openArrow.svg" alt="abrir" id="openCloseList"><h3>Compras</h3>
+                <div id="openCloeseList">
+                    <img src="src/img/openArrow.svg" alt="abrir" id="arrowNavList"><h3>Compras</h3>
                 </div>
-                <ul>
-                    <li>Ovo</li>
-                    <li>Suco de uva</li>
-                    <li>Maça</li>
-                    <li>Banana</li>
-                    <li>Chocolate</li>
+                <ul id="navList">
+                    <li><div class="checkNavList"></div>Ovo</li>
+                    <li><div class="checkNavList"></div>Suco de uva</li>
+                    <li><div class="checkNavList"></div>Maça</li>
+                    <li><div class="checkNavList"></div>Banana</li>
+                    <li><div class="checkNavList"></div>Chocolate</li>
                 </ul>
             </li>
         </ul>
