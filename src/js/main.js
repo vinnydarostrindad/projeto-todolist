@@ -7,6 +7,7 @@ const Header = {
         this.$navButton = document.querySelector('#navButton')
         this.$nav = document.querySelector('#nav')
         this.$closeNav = document.querySelector('#closeNav')
+        this.$html = document.querySelector('html')
     },
     callEvents: function() {
         this.$navButton.onclick = this.Events.openNav_click.bind(this)
@@ -17,6 +18,7 @@ const Header = {
         openNav_click: function() {
             const self = this
 
+            this.$html.classList.add('overflow')
             this.$nav.classList.remove('display')
             this.$closeNav.classList.add('visibility')
             this.$closeNav.classList.add('onScreen')
@@ -29,6 +31,7 @@ const Header = {
         closeNav_click: function() {
             const self = this
 
+            this.$html.classList.remove('overflow')
             this.$nav.classList.remove('opened')
             this.$closeNav.classList.remove('onScreen')
 
@@ -48,14 +51,20 @@ const Nav = {
     navSelectors: function() {
         this.$explainSite = document.querySelector('#explainSite')
         this.$config = document.querySelector('#config')
-        this.$openCloeseList = document.querySelector('#openCloeseList')
-        this.$arrowNavList = document.querySelector('#arrowNavList')
-        this.$navList = document.querySelector('#navList')
+        this.$openCloseList = document.querySelectorAll('#openCloseList')
+        this.$arrowNavList = document.querySelectorAll('#arrowNavList')
+        this.$navList = document.querySelectorAll('#navList')
     },
     callEvents: function() {
+        const self = this
+        
         this.$explainSite.onclick = this.Events.explainSite_click
         this.$config.onclick = this.Events.openConfig_click
-        this.$openCloeseList.onclick = this.Events.openCloseList_click.bind(this)
+
+        this.$openCloseList.forEach(function(e) {
+            e.onclick = self.Events.openCloseList_click
+            console.log(e)
+        })
     },
     
     Events: {
@@ -65,8 +74,17 @@ const Nav = {
         openConfig_click: function() {
             alert('Fora de funcionamento')
         },
-        openCloseList_click: function() {
-            this.$arrowNavList.style = 'transform: rotate(90deg)'
+        openCloseList_click: function(e) {
+            let elementClicked = e.target.tagName
+
+            if (elementClicked == 'IMG' || elementClicked == 'H3') {
+                const dadElement = e.srcElement.parentElement
+                console.log(dadElement.nextSibling.nextSibling)
+                const toggleList = dadElement.nextSibling.nextSibling
+                toggleList.classList.toggle('openCloseNavList')
+            } else if (elementClicked == 'DIV') {
+                console.log('OK Ease')
+            }
         }
     }
 }

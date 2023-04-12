@@ -5,6 +5,10 @@
   box-sizing: border-box;
 }
 
+html.overflow {
+  overflow: hidden;
+}
+
 body {
   font-size: 16px;
   font-family: "Nunito", Arial, sans-serif;
@@ -114,10 +118,22 @@ ul {
 }
 .nav .lists .list div {
   display: flex;
-  gap: 5px;
+  gap: 7px;
 }
 .nav .lists .list div img {
   width: 9px;
+  transition: all 250ms ease-in-out;
+}
+.nav .lists .list div img.openCloseNavListBtn {
+  transform: rotate(90deg);
+}
+.nav .lists .list .navList {
+  max-height: 0px;
+  overflow: hidden;
+  transition: max-height 400ms ease-in-out;
+}
+.nav .lists .list .navList.openCloseNavList {
+  max-height: 110px;
 }
 
 .main .listsContainer .containerList {

@@ -10,6 +10,10 @@ $primaryFont: 'Nunito', Arial, sans-serif;
     box-sizing: border-box;
 }
 
+html.overflow {
+    overflow: hidden;
+}
+
 body {
     font-size: 16px;
     font-family: $primaryFont;
@@ -137,10 +141,27 @@ ul {
 
             div {
                 display: flex;
-                gap: 5px;
+                gap: 7px;
 
                 img {
                     width: 9px;
+                    transition: all 250ms ease-in-out;
+
+                    &.openCloseNavListBtn {
+                        transform: rotate(90deg);
+                    }
+                }
+            }
+
+            .navList {
+                max-height: 0px;
+                overflow: hidden;
+                
+
+                transition: max-height 400ms ease-in-out;
+
+                &.openCloseNavList {
+                    max-height: 110px;
                 }
             }
         }
