@@ -53,78 +53,101 @@
             </li>
         </ul>
     </nav>
+    <div id="addListFocus"></div>
     <main class="main">
         <ul class="listsContainer">
             <li class="containerList">
                 <header class="listHeader">
-                    <div class="listCheck"></div>
+                    <span class="listCheck"></span>
                     <h3>Compras</h3>
-                    <div class="addLine">+</div>
+                    <span class="addLine">+</span>
                 </header>
                 <ul>
                     <li>
-                        <div class="checkBoxLine"></div>
+                        <span class="checkBoxLine"></span>
                         <p>Ovo</p>
-                        <div class="removeLine">x</div>
+                        <span class="removeLine">x</span>
                     </li>
                     <li>
-                        <div class="checkBoxLine"></div>
+                        <span class="checkBoxLine"></span>
                         <p>Suco de uva</p>
-                        <div class="removeLine">x</div>
+                        <span class="removeLine">x</span>
                     </li>
                     <li>
-                        <div class="checkBoxLine"></div>
+                        <span class="checkBoxLine"></span>
                         <p>Maça</p>
-                        <div class="removeLine">x</div>
+                        <span class="removeLine">x</span>
                     </li>
                     <li>
-                        <div class="checkBoxLine"></div>
+                        <span class="checkBoxLine"></span>
                         <p>Banana</p>
-                        <div class="removeLine">x</div>
+                        <span class="removeLine">x</span>
                     </li>
                     <li>
-                        <div class="checkBoxLine"></div>
+                        <span class="checkBoxLine"></span>
                         <p>Chocolate</p>
-                        <div class="removeLine">x</div>
+                        <span class="removeLine">x</span>
                     </li>
                 </ul>
             </li>
             <li class="containerList">
                 <header class="listHeader">
-                    <div class="listCheck"></div>
+                    <span class="listCheck"></span>
                     <h3>Fazer 14/12</h3>
-                    <div class="addLine">+</div>
+                    <span class="addLine">+</span>
                 </header>
                 <ul>
                     <li>
-                        <div class="checkBoxLine"></div>
+                        <span class="checkBoxLine"></span>
                         <p>Comprar presentes</p>
-                        <div class="removeLine">x</div>
+                        <span class="removeLine">x</span>
                     </li>
                     <li>
-                        <div class="checkBoxLine"></div>
+                        <span class="checkBoxLine"></span>
                         <p>Já ter terminado o curso</p>
-                        <div class="removeLine">x</div>
+                        <span class="removeLine">x</span>
                     </li>
                     <li>
-                        <div class="checkBoxLine"></div>
+                        <span class="checkBoxLine"></span>
                         <p>Comprar as coisas pra fazer o jantar em família</p>
-                        <div class="removeLine">x</div>
+                        <span class="removeLine">x</span>
                     </li>
                     <li>
-                        <div class="checkBoxLine"></div>
+                        <span class="checkBoxLine"></span>
                         <p>Passar de ano</p>
-                        <div class="removeLine">x</div>
+                        <span class="removeLine">x</span>
                     </li>
                     <li>
-                        <div class="checkBoxLine"></div>
+                        <span class="checkBoxLine"></span>
                         <p>Conhecer mais pessoas</p>
-                        <div class="removeLine">x</div>
+                        <span class="removeLine">x</span>
                     </li>
                 </ul>
             </li>
         </ul>
-        <button class="addList">+</button>
+        <button class="addListBtn" id="addListBtn">+</button>
+        <form class="addListContainer" id="addListContainer">
+            <div>
+                <h3>Crie sua Lista</h3><span>x</span>
+            </div>
+            <div class="listName">
+                <label for="listName">Nome</label>
+                <input type="text" id="listName" placeholder="Nome da lista">
+            </div>
+            <hr style="border: 1px solid #3f92ff3d">
+            <h4 id="listName">Nome da lista</h4>
+            <div class="listTask">
+                <label for="listLine">+</label>
+                <input type="text" id="listLine" placeholder="Adicione uma tarefa">
+            </div>
+           <ul class="addedTasksList" id="taskAdded">
+                <li>Camarão</li>
+                <li>Molho de tomate</li>
+                <li>Jalapeños</li>
+                <li>Macaco</li>
+                <li>Treinar</li>
+           </ul>
+        </form>
     </main>
 
     <script src="src/js/main.js"></script>

@@ -2,6 +2,7 @@
 
 $primaryColor: #7FC8F5;
 $secundaryColor: #62abe7;
+$tertiaryColor: #3f93ff;
 $primaryFont: 'Nunito', Arial, sans-serif;
 
 * {
@@ -142,6 +143,7 @@ ul {
             div {
                 display: flex;
                 gap: 7px;
+                cursor: pointer;
 
                 img {
                     width: 9px;
@@ -165,6 +167,22 @@ ul {
                 }
             }
         }
+    }
+}
+
+#addListFocus {
+    display: none; 
+    position: fixed;
+    top: 0;
+    background-color: rgba(0, 0, 0, 0.4);
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    transition: background-color 300ms;
+    
+
+    &.onScreen {
+        display: block;
     }
 }
 
@@ -212,7 +230,7 @@ ul {
                         height: 20px;
                         margin-right: 15px;
                     }
-
+                    
                     .removeLine {
                         position: absolute;
                         right: 15px;
@@ -223,7 +241,7 @@ ul {
         }
     }
 
-    .addList {
+    .addListBtn {
         display: block;
         background-color: white;
         color: gray;
@@ -233,5 +251,86 @@ ul {
         border-radius: 50%;
         margin: 15vh auto;
         border: 1px solid gray;
+    }
+
+    .addListContainer {
+        display: none;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        color: $tertiaryColor;
+        background-color: #fff;
+        width: 80%;
+        height: 90%;
+        padding: 15px 20px;
+        z-index: 1;
+        border-radius: 15px;
+        
+        &.showAddListContainer {
+            display: block;
+        }
+        
+        input {
+                border: none;
+                outline: none;
+                height: 100%;
+            }
+
+        div:first-child {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 5px;
+
+            h3 {
+                font-size: 1.8em;
+                font-weight: 400;
+                margin: 0px;
+            }
+
+            span {
+                font-size: 1.1em;
+                font-weight: bold;
+                margin-right: 5px;
+            }
+        }
+
+        .listName {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            height: 35px;
+            margin-bottom: 5px;
+
+            label {
+                font-size: 1.15em;
+                font-weight: 300;
+                
+            }
+        }
+
+        h4 {
+            font-size: 1.3em;
+            font-weight: 400;
+            margin: 5px 0 2px;
+        }
+
+        .listTask {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            height: 35px;
+
+            label {
+                font-size: 2em;
+                font-weight: 300;
+                text-align: center;
+            }
+        }
+
+        .addedTasksList {
+            
+        }
     }
 }

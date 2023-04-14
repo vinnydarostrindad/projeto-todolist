@@ -63,7 +63,6 @@ const Nav = {
 
         this.$openCloseList.forEach(function(e) {
             e.onclick = self.Events.openCloseList_click
-            console.log(e)
         })
     },
     
@@ -79,29 +78,49 @@ const Nav = {
 
             if (elementClicked == 'IMG' || elementClicked == 'H3') {
                 const dadElement = e.srcElement.parentElement
-                console.log(dadElement.nextSibling.nextSibling)
                 const toggleList = dadElement.nextSibling.nextSibling
+                
                 toggleList.classList.toggle('openCloseNavList')
+
+                if (elementClicked == 'H3') {
+                    const listArrow = e.srcElement.previousSibling
+                    
+                    listArrow.classList.toggle('openCloseNavListBtn')
+                } else {
+                    e.srcElement.classList.toggle('openCloseNavListBtn')
+                }
             } else if (elementClicked == 'DIV') {
-                console.log('OK Ease')
+                const toggleList = e.srcElement.nextSibling.nextSibling
+                const listArrow = e.srcElement.children[0]
+
+                toggleList.classList.toggle('openCloseNavList')
+                listArrow.classList.toggle('openCloseNavListBtn')
             }
         }
     }
 }
+
 const Main = {
     setup:  function() {
         this.mainSelectors()
         this.callEvents()
     },
     mainSelectors: function() {
-
+        this.$addListBtn = document.querySelector('#addListBtn')
+        this.$addListContainer = document.querySelector('#addListContainer')
+        this.$addListFocus = document.querySelector('#addListFocus')
+        this.$html = document.querySelector('html')
     },
     callEvents: function() {
-
+        this.$addListBtn.onclick = this.Events.creatNewList_click.bind(this)
     },
     
     Events: {
-       
+        creatNewList_click: function() {
+            this.$addListContainer.classList.toggle('showAddListContainer')
+            this.$addListFocus.classList.toggle('onScreen')
+            this.$html.classList.add('overflow')
+       }
     }
 }
 
