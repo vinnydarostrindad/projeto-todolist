@@ -110,17 +110,83 @@ const Main = {
         this.$addListContainer = document.querySelector('#addListContainer')
         this.$addListFocus = document.querySelector('#addListFocus')
         this.$html = document.querySelector('html')
+        this.$closeCreatListBtn = document.querySelector('#closeCreatList')
+
+        this.$inputListName = document.querySelector('#inputListName')
+        this.$listName = document.querySelector('#listName')
+        this.$addTaskBtn = document.querySelector('#addTask')
+        this.$inputListLine = document.querySelector('#listLine')
+        this.$tasksAddedList = document.querySelector('#tasksAdded')
     },
     callEvents: function() {
-        this.$addListBtn.onclick = this.Events.creatNewList_click.bind(this)
+        this.$addListBtn.onclick = this.Events.openCreatNewList_click.bind(this)
+        this.$closeCreatListBtn.onclick = this.Events.closeCreatNewList_click.bind(this)
+        this.$inputListName.onclick = this.Events.changeListName_click.bind(this)
+        this.$inputListName.onkeypress = this.Events.confirmListName_keypress.bind(this)
+        this.$addTaskBtn.onclick = this.Events.addTask_click.bind(this) 
+        this.$inputListLine.onkeypress = this.Events.addTask_keypress.bind(this)
     },
     
     Events: {
-        creatNewList_click: function() {
-            this.$addListContainer.classList.toggle('showAddListContainer')
-            this.$addListFocus.classList.toggle('onScreen')
+        openCreatNewList_click: function() {
+            this.$addListContainer.classList.add('showAddListContainer')
+            this.$addListFocus.classList.add('onScreen')
             this.$html.classList.add('overflow')
-       }
+        },
+        closeCreatNewList_click: function() {
+            this.$addListContainer.classList.remove('showAddListContainer')
+            this.$addListFocus.classList.remove('onScreen')
+            this.$html.classList.remove('overflow')
+        },
+        changeListName_click: function() {
+            let listName = this.$inputListName
+
+            if (listName.value == 'Nome da lista') {
+                listName.value = ""
+            }
+        },
+        confirmListName_keypress: function(e) {
+            if (e.key == 'Enter') {
+                if (this.$inputListName.value != "") {
+                    console.log('OK')
+                    this.$inputListLine.focus()
+                }
+            }
+        },
+        addTask_click: function() {
+            let inputTask = this.$inputListLine
+            console.dir(this.$tasksAddedList)
+            
+            if (inputTask.value == '') {
+                return
+            }
+
+            this.$tasksAddedList.innerHTML += `<li>${inputTask.value} <span>x</span></li>`
+            inputTask.value = ""
+            console.dir(this.$tasksAddedList)
+        },
+        addTask_keypress: function(e) {
+            if (e.key == 'Enter') { 
+                let inputTask = this.$inputListLine
+                
+                
+                if (inputTask.value == '') {
+                    return
+                } 
+                
+                this.$tasksAddedList.innerHTML += `<li>${inputTask.value} <span>x</span></li>`
+                let tasksArray = []
+
+                for (i = 0; i < this.$tasksAddedList.children.length; i++) {
+                    tasksArray.push(this.$tasksAddedList.children[i].firstChild.data)
+                    console.log(tasksArray)
+                    console.log(tasksArray[i])
+                }
+                console.log(this.$tasksAddedList.children[0].firstChild.data)
+                inputTask.value = ""
+                
+            }
+        }
     }
 }
 

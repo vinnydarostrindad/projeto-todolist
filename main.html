@@ -128,25 +128,18 @@
         <button class="addListBtn" id="addListBtn">+</button>
         <form class="addListContainer" id="addListContainer">
             <div>
-                <h3>Crie sua Lista</h3><span>x</span>
+                <h3>Crie sua Lista</h3><span id="closeCreatList">x</span>
             </div>
-            <div class="listName">
-                <label for="listName">Nome</label>
-                <input type="text" id="listName" placeholder="Nome da lista">
-            </div>
-            <hr style="border: 1px solid #3f92ff3d">
-            <h4 id="listName">Nome da lista</h4>
+            <h4 class="listName" id="listName">
+                <label for="inputListName">
+                    <img src="src/img/editName.svg" alt="Editar">
+                </label>
+                <input type="text" id="inputListName" value="Nome da lista" autocomplete="off"></h4>
             <div class="listTask">
-                <label for="listLine">+</label>
-                <input type="text" id="listLine" placeholder="Adicione uma tarefa">
+                <span id="addTask">+</span>
+                <input type="text" id="listLine" placeholder="Adicione uma tarefa" autocomplete="off">
             </div>
-           <ul class="addedTasksList" id="taskAdded">
-                <li>Camarão</li>
-                <li>Molho de tomate</li>
-                <li>Jalapeños</li>
-                <li>Macaco</li>
-                <li>Treinar</li>
-           </ul>
+            <ul class="addedTasksList" id="tasksAdded"></ul>
         </form>
     </main>
 

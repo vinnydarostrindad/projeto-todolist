@@ -212,21 +212,17 @@ ul {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  color: #3f93ff;
+  color: #0052cc;
   background-color: #fff;
   width: 80%;
   height: 90%;
   padding: 15px 20px;
   z-index: 1;
   border-radius: 15px;
+  box-shadow: 15px 15px 15px rgba(0, 0, 0, 0.2196078431);
 }
 .main .addListContainer.showAddListContainer {
   display: block;
-}
-.main .addListContainer input {
-  border: none;
-  outline: none;
-  height: 100%;
 }
 .main .addListContainer div:first-child {
   display: flex;
@@ -242,32 +238,72 @@ ul {
 .main .addListContainer div:first-child span {
   font-size: 1.1em;
   font-weight: bold;
+  width: 25px;
+  text-align: center;
   margin-right: 5px;
+  cursor: pointer;
+}
+.main .addListContainer input {
+  border: none;
+  outline: none;
+  font-size: 1.1em;
+  width: 80%;
+  height: 100%;
+}
+.main .addListContainer input::-moz-placeholder {
+  color: #0052cc;
+  font-size: 0.9em;
+}
+.main .addListContainer input::placeholder {
+  color: #0052cc;
+  font-size: 0.9em;
+}
+.main .addListContainer h4 {
+  font-size: 1.4em;
+  font-weight: 400;
+  margin: 8px 0 2px;
 }
 .main .addListContainer .listName {
   display: flex;
   align-items: center;
   gap: 10px;
   height: 35px;
-  margin-bottom: 5px;
+  padding-bottom: 5px;
+  border-bottom: 2px solid rgba(0, 82, 204, 0.2941176471);
 }
 .main .addListContainer .listName label {
-  font-size: 1.15em;
-  font-weight: 300;
+  height: 30px;
 }
-.main .addListContainer h4 {
-  font-size: 1.3em;
-  font-weight: 400;
-  margin: 5px 0 2px;
+.main .addListContainer .listName label img {
+  width: 20px;
+}
+.main .addListContainer .listName input {
+  color: #0052cc;
 }
 .main .addListContainer .listTask {
   display: flex;
   align-items: center;
   gap: 10px;
   height: 35px;
+  margin-bottom: 4px;
 }
-.main .addListContainer .listTask label {
-  font-size: 2em;
+.main .addListContainer .listTask span {
+  font-size: 2.15em;
   font-weight: 300;
   text-align: center;
+}
+.main .addListContainer .addedTasksList {
+  border-bottom: 2px solid rgba(0, 82, 204, 0.2941176471);
+}
+.main .addListContainer .addedTasksList :last-child {
+  padding-bottom: 8px;
+}
+.main .addListContainer .addedTasksList li {
+  display: flex;
+  justify-content: space-between;
+  color: rgb(99, 99, 99);
+  font-size: 1.1em;
+}
+.main .addListContainer .addedTasksList li span {
+  margin-right: 13px;
 }/*# sourceMappingURL=main.css.map */

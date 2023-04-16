@@ -2,7 +2,7 @@
 
 $primaryColor: #7FC8F5;
 $secundaryColor: #62abe7;
-$tertiaryColor: #3f93ff;
+$tertiaryColor: #0052cc;
 $primaryFont: 'Nunito', Arial, sans-serif;
 
 * {
@@ -266,17 +266,12 @@ ul {
         padding: 15px 20px;
         z-index: 1;
         border-radius: 15px;
+        box-shadow: 15px 15px 15px #00000038;
         
         &.showAddListContainer {
             display: block;
         }
-        
-        input {
-                border: none;
-                outline: none;
-                height: 100%;
-            }
-
+    
         div:first-child {
             display: flex;
             justify-content: space-between;
@@ -285,15 +280,37 @@ ul {
 
             h3 {
                 font-size: 1.8em;
-                font-weight: 400;
+                font-weight:400;
                 margin: 0px;
             }
 
             span {
                 font-size: 1.1em;
                 font-weight: bold;
+                width: 25px;
+                text-align: center;
                 margin-right: 5px;
+                cursor: pointer;
             }
+        }
+
+        input {
+            border: none;
+            outline: none;
+            font-size: 1.1em;
+            width: 80%;
+            height: 100%;
+
+            &::placeholder {
+                color: $tertiaryColor;
+                font-size: .9em;
+            }
+        }
+        
+        h4 {
+            font-size: 1.4em;
+            font-weight: 400;
+            margin: 8px 0 2px;
         }
 
         .listName {
@@ -301,36 +318,53 @@ ul {
             align-items: center;
             gap: 10px;
             height: 35px;
-            margin-bottom: 5px;
+            padding-bottom: 5px;
+            border-bottom: 2px solid #0052cc4b;
 
             label {
-                font-size: 1.15em;
-                font-weight: 300;
-                
+                height: 30px;
+
+                img {
+                    width: 20px;
+                }
+            }
+
+            input {
+                color: $tertiaryColor;
             }
         }
-
-        h4 {
-            font-size: 1.3em;
-            font-weight: 400;
-            margin: 5px 0 2px;
-        }
-
+ 
         .listTask {
             display: flex;
             align-items: center;
             gap: 10px;
             height: 35px;
+            margin-bottom: 4px;
 
-            label {
-                font-size: 2em;
+            span {
+                font-size: 2.15em;
                 font-weight: 300;
                 text-align: center;
             }
         }
 
         .addedTasksList {
-            
+            border-bottom: 2px solid #0052cc4b;
+
+            :last-child {
+                padding-bottom: 8px;
+            }
+
+            li {
+                display: flex;
+                justify-content: space-between;
+                color: rgb(99, 99, 99);
+                font-size: 1.1em;
+
+                span {
+                    margin-right: 13px;
+                }
+            }
         }
     }
 }
