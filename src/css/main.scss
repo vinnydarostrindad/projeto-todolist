@@ -170,7 +170,7 @@ ul {
     }
 }
 
-#addListFocus {
+#creatListFocus {
     display: none; 
     position: fixed;
     top: 0;
@@ -206,7 +206,7 @@ ul {
                 padding: 5px;
                 border-radius: 6px 6px 0 0;
 
-                .addLine {
+                .creatLine {
                     position: absolute;
                     right: 15px;
                     font-size: 1.1em;
@@ -241,7 +241,7 @@ ul {
         }
     }
 
-    .addListBtn {
+    .creatListBtn {
         display: block;
         background-color: white;
         color: gray;
@@ -253,7 +253,7 @@ ul {
         border: 1px solid gray;
     }
 
-    .addListContainer {
+    .creatListContainer {
         display: none;
         position: fixed;
         top: 50%;
@@ -268,7 +268,7 @@ ul {
         border-radius: 15px;
         box-shadow: 15px 15px 15px #00000038;
         
-        &.showAddListContainer {
+        &.showCreatListContainer {
             display: block;
         }
     
@@ -294,7 +294,7 @@ ul {
             }
         }
 
-        input {
+        input[type=text] {
             border: none;
             outline: none;
             font-size: 1.1em;
@@ -348,7 +348,7 @@ ul {
             }
         }
 
-        .addedTasksList {
+        .createdTasksList {
             border-bottom: 2px solid #0052cc4b;
 
             :last-child {
@@ -361,10 +361,20 @@ ul {
                 color: rgb(99, 99, 99);
                 font-size: 1.1em;
 
+                &.remove {
+                    display: none;
+                }
+
                 span {
                     margin-right: 13px;
                 }
             }
+        }
+
+        input[type=button] {
+            border: none;
+            color: white;
+            background: $tertiaryColor;
         }
     }
 }

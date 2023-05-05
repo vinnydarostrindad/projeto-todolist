@@ -137,7 +137,7 @@ ul {
   max-height: 110px;
 }
 
-#addListFocus {
+#creatListFocus {
   display: none;
   position: fixed;
   top: 0;
@@ -147,7 +147,7 @@ ul {
   z-index: 1;
   transition: background-color 300ms;
 }
-#addListFocus.onScreen {
+#creatListFocus.onScreen {
   display: block;
 }
 
@@ -168,7 +168,7 @@ ul {
   padding: 5px;
   border-radius: 6px 6px 0 0;
 }
-.main .listsContainer .containerList .listHeader .addLine {
+.main .listsContainer .containerList .listHeader .creatLine {
   position: absolute;
   right: 15px;
   font-size: 1.1em;
@@ -195,7 +195,7 @@ ul {
   right: 15px;
   color: gray;
 }
-.main .addListBtn {
+.main .creatListBtn {
   display: block;
   background-color: white;
   color: gray;
@@ -206,7 +206,7 @@ ul {
   margin: 15vh auto;
   border: 1px solid gray;
 }
-.main .addListContainer {
+.main .creatListContainer {
   display: none;
   position: fixed;
   top: 50%;
@@ -221,21 +221,21 @@ ul {
   border-radius: 15px;
   box-shadow: 15px 15px 15px rgba(0, 0, 0, 0.2196078431);
 }
-.main .addListContainer.showAddListContainer {
+.main .creatListContainer.showCreatListContainer {
   display: block;
 }
-.main .addListContainer div:first-child {
+.main .creatListContainer div:first-child {
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin-bottom: 5px;
 }
-.main .addListContainer div:first-child h3 {
+.main .creatListContainer div:first-child h3 {
   font-size: 1.8em;
   font-weight: 400;
   margin: 0px;
 }
-.main .addListContainer div:first-child span {
+.main .creatListContainer div:first-child span {
   font-size: 1.1em;
   font-weight: bold;
   width: 25px;
@@ -243,27 +243,27 @@ ul {
   margin-right: 5px;
   cursor: pointer;
 }
-.main .addListContainer input {
+.main .creatListContainer input[type=text] {
   border: none;
   outline: none;
   font-size: 1.1em;
   width: 80%;
   height: 100%;
 }
-.main .addListContainer input::-moz-placeholder {
+.main .creatListContainer input[type=text]::-moz-placeholder {
   color: #0052cc;
   font-size: 0.9em;
 }
-.main .addListContainer input::placeholder {
+.main .creatListContainer input[type=text]::placeholder {
   color: #0052cc;
   font-size: 0.9em;
 }
-.main .addListContainer h4 {
+.main .creatListContainer h4 {
   font-size: 1.4em;
   font-weight: 400;
   margin: 8px 0 2px;
 }
-.main .addListContainer .listName {
+.main .creatListContainer .listName {
   display: flex;
   align-items: center;
   gap: 10px;
@@ -271,39 +271,47 @@ ul {
   padding-bottom: 5px;
   border-bottom: 2px solid rgba(0, 82, 204, 0.2941176471);
 }
-.main .addListContainer .listName label {
+.main .creatListContainer .listName label {
   height: 30px;
 }
-.main .addListContainer .listName label img {
+.main .creatListContainer .listName label img {
   width: 20px;
 }
-.main .addListContainer .listName input {
+.main .creatListContainer .listName input {
   color: #0052cc;
 }
-.main .addListContainer .listTask {
+.main .creatListContainer .listTask {
   display: flex;
   align-items: center;
   gap: 10px;
   height: 35px;
   margin-bottom: 4px;
 }
-.main .addListContainer .listTask span {
+.main .creatListContainer .listTask span {
   font-size: 2.15em;
   font-weight: 300;
   text-align: center;
 }
-.main .addListContainer .addedTasksList {
+.main .creatListContainer .createdTasksList {
   border-bottom: 2px solid rgba(0, 82, 204, 0.2941176471);
 }
-.main .addListContainer .addedTasksList :last-child {
+.main .creatListContainer .createdTasksList :last-child {
   padding-bottom: 8px;
 }
-.main .addListContainer .addedTasksList li {
+.main .creatListContainer .createdTasksList li {
   display: flex;
   justify-content: space-between;
   color: rgb(99, 99, 99);
   font-size: 1.1em;
 }
-.main .addListContainer .addedTasksList li span {
+.main .creatListContainer .createdTasksList li.remove {
+  display: none;
+}
+.main .creatListContainer .createdTasksList li span {
   margin-right: 13px;
+}
+.main .creatListContainer input[type=button] {
+  border: none;
+  color: white;
+  background: #0052cc;
 }/*# sourceMappingURL=main.css.map */

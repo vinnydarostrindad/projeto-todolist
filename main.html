@@ -53,14 +53,14 @@
             </li>
         </ul>
     </nav>
-    <div id="addListFocus"></div>
+    <div id="creatListFocus"></div>
     <main class="main">
         <ul class="listsContainer">
             <li class="containerList">
                 <header class="listHeader">
                     <span class="listCheck"></span>
                     <h3>Compras</h3>
-                    <span class="addLine">+</span>
+                    <span class="creatLine">+</span>
                 </header>
                 <ul>
                     <li>
@@ -70,7 +70,7 @@
                     </li>
                     <li>
                         <span class="checkBoxLine"></span>
-                        <p>Suco de uva</p>
+                        <p>LFC11086154601</p>
                         <span class="removeLine">x</span>
                     </li>
                     <li>
@@ -94,7 +94,7 @@
                 <header class="listHeader">
                     <span class="listCheck"></span>
                     <h3>Fazer 14/12</h3>
-                    <span class="addLine">+</span>
+                    <span class="creatLine">+</span>
                 </header>
                 <ul>
                     <li>
@@ -125,8 +125,8 @@
                 </ul>
             </li>
         </ul>
-        <button class="addListBtn" id="addListBtn">+</button>
-        <form class="addListContainer" id="addListContainer">
+        <button class="creatListBtn" id="creatListBtn">+</button>
+        <form class="creatListContainer" id="creatListContainer">
             <div>
                 <h3>Crie sua Lista</h3><span id="closeCreatList">x</span>
             </div>
@@ -134,12 +134,15 @@
                 <label for="inputListName">
                     <img src="src/img/editName.svg" alt="Editar">
                 </label>
-                <input type="text" id="inputListName" value="Nome da lista" autocomplete="off"></h4>
+                <input type="text" id="inputListName" placeholder="Nome da lista" autocomplete="off"></h4>
             <div class="listTask">
-                <span id="addTask">+</span>
+                <span id="creatTask">+</span>
                 <input type="text" id="listLine" placeholder="Adicione uma tarefa" autocomplete="off">
             </div>
-            <ul class="addedTasksList" id="tasksAdded"></ul>
+            <ul class="createdTasksList" id="tasksCreated">
+
+            </ul>
+            <input type="button" value="ADD LIST">
         </form>
     </main>
 
