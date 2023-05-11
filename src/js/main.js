@@ -118,6 +118,7 @@ const Main = {
         this.$inputListLine = document.querySelector('#listLine')
         this.$tasksCreatedList = document.querySelector('#tasksCreated')
         this.$removeTaskCreated = document.querySelectorAll('#removeTaskCreatedBtn')
+        this.$confirmExitContainer = document.querySelector('#confirmExit')
     },
     callEvents: function() {
         const self = this
@@ -131,10 +132,6 @@ const Main = {
             e.onclick = self.Events.removeTaskCreated_click.bind(self)
         })
     },
-
-    globalVars: {
-        taskArray: [],
-    },
     Events: {
         openCreatNewList_click: function() {
             this.$creatListContainer.classList.add('showCreatListContainer')
@@ -143,9 +140,21 @@ const Main = {
             this.$inputListName.focus()
         },
         closeCreatNewList_click: function() {
-            this.$creatListContainer.classList.remove('showCreatListContainer')
-            this.$creatListFocus.classList.remove('onScreen')
-            this.$html.classList.remove('overflow')
+            this.$confirmExitContainer.classList.add('appearConfirmExitBg')
+
+            if (a + b == 61) {
+                this.$creatListContainer.classList.remove('showCreatListContainer')
+                this.$creatListFocus.classList.remove('onScreen')
+                this.$html.classList.remove('overflow')
+
+                this.$inputListName.value = ""
+                let listLength = this.$tasksCreatedList.children.length
+                for (var i = 0; i < listLength; i++) {
+                    console.log(listLength)
+                    let listLine = this.$tasksCreatedList.children[0]
+                    listLine.remove()
+                }
+            }
         },
         confirmListName_keypress: function(e) {
             if (e.key == 'Enter') {
@@ -157,26 +166,25 @@ const Main = {
         creatTask_click: function() {
             let inputTask = this.$inputListLine
                 
-                if (inputTask.value == '') {
-                    return
-                } else if (this.globalVars.taskArray.length != 0) {
-                    for (let tasks of this.globalVars.taskArray) {
-                            if (tasks == inputTask.value) {
-                                    alert('Já adicionado')
-                            inputTask.value = ""
-                            return
-                        }
-                    } 
-                }
+            if (inputTask.value == '') {
+                return
+            } else if (this.$tasksCreatedList.children.length != 0) {
+                for (let tasks of this.$tasksCreatedList.children) {
+                    console.dir(tasks.firstChild.textContent)
+                    if (tasks.firstChild.textContent == inputTask.value) {
+                        alert('Já adicionado')
+                        inputTask.value = ""
+                        return
+                    }
+                } 
+            }
+            
+            this.$tasksCreatedList.innerHTML += `<li><span>${inputTask.value}</span> <span id='removeTaskCreatedBtn'>x</span></li>`
 
-                this.globalVars.taskArray.push(inputTask.value)
-                
-                this.$tasksCreatedList.innerHTML += `<li><span>${inputTask.value}</span> <span id='removeTaskCreatedBtn'>x</span></li>`
-
-                inputTask.value = ""
-                this.$inputListLine.focus()
-                this.mainSelectors()
-                this.callEvents()
+            inputTask.value = ""
+            this.$inputListLine.focus()
+            this.mainSelectors()
+            this.callEvents()
         },
         creatTask_keypress: function(e) {
             if (e.key == 'Enter') { 
@@ -184,17 +192,16 @@ const Main = {
                 
                 if (inputTask.value == '') {
                     return
-                } else if (this.globalVars.taskArray.length != 0) {
-                    for (let tasks of this.globalVars.taskArray) {
-                            if (tasks == inputTask.value) {
-                                    alert('Já adicionado')
+                } else if (this.$tasksCreatedList.children.length != 0) {
+                    for (let tasks of this.$tasksCreatedList.children) {
+                        console.dir(tasks.firstChild.textContent)
+                        if (tasks.firstChild.textContent == inputTask.value) {
+                            alert('Já adicionado')
                             inputTask.value = ""
                             return
                         }
                     } 
                 }
-
-                this.globalVars.taskArray.push(inputTask.value)
                 
                 this.$tasksCreatedList.innerHTML += `<li><span>${inputTask.value}</span> <span id='removeTaskCreatedBtn'>x</span></li>`
 
@@ -208,11 +215,11 @@ const Main = {
             let removeCreatedLine = e.target.parentElement
             let linetaskremoved = e.target.parentElement.firstChild.textContent
             
-            removeCreatedLine.classList.add('remove')
-            for (let tasks of this.globalVars.taskArray) {
+            removeCreatedLine.remove()
+            for (let tasks of this.$tasksCreatedList.children) {
                 if (tasks == linetaskremoved) {
-                    let positionInArray = this.globalVars.taskArray.indexOf(tasks)
-                    this.globalVars.taskArray.splice(positionInArray, 1)
+                    let positionInArray = this.$tasksCreatedList.children.indexOf(tasks)
+                    this.$tasksCreatedList.children.splice(positionInArray, 1)
                 }
             }
         },

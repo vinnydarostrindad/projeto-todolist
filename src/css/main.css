@@ -21,6 +21,9 @@ ul {
   list-style: none;
 }
 
+/************
+*   HEADER
+*************/
 .header {
   display: flex;
   justify-content: space-evenly;
@@ -58,6 +61,9 @@ ul {
   width: 40px;
 }
 
+/**********
+*   NAV
+**********/
 #closeNav {
   visibility: hidden;
   position: fixed;
@@ -137,6 +143,9 @@ ul {
   max-height: 110px;
 }
 
+/**********
+*   MAIN
+***********/
 #creatListFocus {
   display: none;
   position: fixed;
@@ -215,7 +224,7 @@ ul {
   color: #0052cc;
   background-color: #fff;
   width: 80%;
-  height: 90%;
+  max-height: 90%;
   padding: 15px 20px;
   z-index: 1;
   border-radius: 15px;
@@ -294,6 +303,8 @@ ul {
 }
 .main .creatListContainer .createdTasksList {
   border-bottom: 2px solid rgba(0, 82, 204, 0.2941176471);
+  max-height: 382px;
+  overflow-y: auto;
 }
 .main .creatListContainer .createdTasksList :last-child {
   padding-bottom: 8px;
@@ -303,6 +314,7 @@ ul {
   justify-content: space-between;
   color: rgb(99, 99, 99);
   font-size: 1.1em;
+  height: 35px;
 }
 .main .creatListContainer .createdTasksList li.remove {
   display: none;
@@ -311,7 +323,72 @@ ul {
   margin-right: 13px;
 }
 .main .creatListContainer input[type=button] {
+  display: block;
   border: none;
   color: white;
   background: #0052cc;
+  margin: 12px auto 0;
+  padding: 8px 10px;
+  border-radius: 1px;
+  cursor: pointer;
+}
+.main .confirmExitBgContainer {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.7);
+  -webkit-backdrop-filter: blur(2px);
+          backdrop-filter: blur(2px);
+  z-index: 2;
+}
+.main .confirmExitBgContainer.appearConfirmExitBg {
+  display: block;
+}
+.main .confirmExitBgContainer .confirmExitContainer {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 250px;
+  max-width: 250px;
+  background-color: white;
+  padding: 15px;
+  border-radius: 4px;
+}
+.main .confirmExitBgContainer .confirmExitContainer p {
+  color: rgb(58, 58, 58);
+  font-weight: bold;
+  margin-bottom: 7px;
+}
+.main .confirmExitBgContainer .confirmExitContainer div {
+  display: flex;
+  gap: 5px;
+}
+.main .confirmExitBgContainer .confirmExitContainer div input {
+  border: none;
+  font-size: 14px;
+  font-weight: bold;
+  font-family: "Nunito", Arial, sans-serif;
+  border-radius: 2px;
+}
+.main .confirmExitBgContainer .confirmExitContainer div input:first-of-type {
+  background-color: #0052cc;
+  color: rgb(255, 255, 255);
+  padding: 2px 8px;
+}
+.main .confirmExitBgContainer .confirmExitContainer div input:first-of-type:hover {
+  background-color: rgb(0, 33, 143);
+}
+.main .confirmExitBgContainer .confirmExitContainer div input:last-of-type {
+  background-color: rgb(219, 219, 219);
+  color: black;
+  padding: 2px 5px;
+}
+.main .confirmExitBgContainer .confirmExitContainer div input:last-of-type:hover {
+  background-color: rgb(161, 161, 161);
 }/*# sourceMappingURL=main.css.map */
