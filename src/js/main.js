@@ -119,18 +119,25 @@ const Main = {
         this.$tasksCreatedList = document.querySelector('#tasksCreated')
         this.$removeTaskCreated = document.querySelectorAll('#removeTaskCreatedBtn')
         this.$confirmExitContainer = document.querySelector('#confirmExit')
+        this.$confirmExitBtn = document.querySelectorAll('#confirmExitBtn')
+        this.$addListBtn = document.querySelector('#addListBtn')
+        
     },
     callEvents: function() {
         const self = this
 
         this.$creatListBtn.onclick = self.Events.openCreatNewList_click.bind(this)
         this.$closeCreatListBtn.onclick = self.Events.closeCreatNewList_click.bind(this)
+        this.$confirmExitBtn.forEach(function(e) {
+            e.onclick = self.Events.chooseOkCancel_click.bind(self)
+        })
         this.$inputListName.onkeypress = self.Events.confirmListName_keypress.bind(this)
         this.$creatTaskBtn.onclick = self.Events.creatTask_click.bind(this) 
         this.$inputListLine.onkeypress = self.Events.creatTask_keypress.bind(this)
         this.$removeTaskCreated.forEach(function(e) {
             e.onclick = self.Events.removeTaskCreated_click.bind(self)
         })
+        this.$addListBtn.onclick = self.Events.addList_click.bind(this)
     },
     Events: {
         openCreatNewList_click: function() {
@@ -140,21 +147,31 @@ const Main = {
             this.$inputListName.focus()
         },
         closeCreatNewList_click: function() {
-            this.$confirmExitContainer.classList.add('appearConfirmExitBg')
+            if (this.$inputListName.value != "" || this.$inputListLine.value != "" || this.$tasksCreatedList.children.length != 0) {
+                this.$confirmExitContainer.classList.add('appearConfirmExitBg')
+            } else {
+                this.$creatListContainer.classList.remove('showCreatListContainer')
+                this.$creatListFocus.classList.remove('onScreen')
+                this.$html.classList.remove('overflow')
+            }
+        },
+        chooseOkCancel_click: function(e) {   
+            let btnClicked = e.target.value
 
-            if (a + b == 61) {
+            if (btnClicked == "OK") {
                 this.$creatListContainer.classList.remove('showCreatListContainer')
                 this.$creatListFocus.classList.remove('onScreen')
                 this.$html.classList.remove('overflow')
 
                 this.$inputListName.value = ""
+                this.$inputListLine.value = ""
                 let listLength = this.$tasksCreatedList.children.length
                 for (var i = 0; i < listLength; i++) {
-                    console.log(listLength)
                     let listLine = this.$tasksCreatedList.children[0]
                     listLine.remove()
                 }
             }
+            this.$confirmExitContainer.classList.remove('appearConfirmExitBg')
         },
         confirmListName_keypress: function(e) {
             if (e.key == 'Enter') {
@@ -170,7 +187,6 @@ const Main = {
                 return
             } else if (this.$tasksCreatedList.children.length != 0) {
                 for (let tasks of this.$tasksCreatedList.children) {
-                    console.dir(tasks.firstChild.textContent)
                     if (tasks.firstChild.textContent == inputTask.value) {
                         alert('Já adicionado')
                         inputTask.value = ""
@@ -194,7 +210,6 @@ const Main = {
                     return
                 } else if (this.$tasksCreatedList.children.length != 0) {
                     for (let tasks of this.$tasksCreatedList.children) {
-                        console.dir(tasks.firstChild.textContent)
                         if (tasks.firstChild.textContent == inputTask.value) {
                             alert('Já adicionado')
                             inputTask.value = ""
@@ -223,6 +238,25 @@ const Main = {
                 }
             }
         },
+        addList_click: function(e) {
+            let verification = 1
+
+            if (this.$inputListName.value == "") {
+                console.log('Coloque um nome')
+                verification--
+            }
+            if (this.$tasksCreatedList.children.length == 0) {
+                console.log('Adicione algo na lista')
+                verification--
+            } 
+            if (this.$inputListLine.value != "") {
+                console.log('Deseja colocar ' + this.$inputListLine.value + ' na lista?')
+            }
+            if (verification == 1) {
+                console.log('Tudo certo')
+            }
+        
+        }
     }
 }
 

@@ -32,11 +32,11 @@
                     <img src="src/img/openArrow.svg" alt="abrir" id="arrowNavList"><h3>Compras</h3>
                 </div>
                 <ul class="navList" id="navList">
-                    <li><div class="checkNavList"></div>Ovo</li>
-                    <li><div class="checkNavList"></div>Suco de uva</li>
-                    <li><div class="checkNavList"></div>Maça</li>
-                    <li><div class="checkNavList"></div>Banana</li>
-                    <li><div class="checkNavList"></div>Chocolate</li>
+                    <li><div class="checkNavList"></div></li>
+                    <li><div class="checkNavList"></div></li>
+                    <li><div class="checkNavList"></div></li>
+                    <li><div class="checkNavList"></div></li>
+                    <li><div class="checkNavList"></div></li>
                 </ul>
             </li>
             <li class="list" id="list">
@@ -99,28 +99,26 @@
                 <ul>
                     <li>
                         <span class="checkBoxLine"></span>
-                        <p>Comprar presentes</p>
-                        <span class="removeLine">x</span>
+                        <div>
+                            <p>
+
+                            </p>
+                            <span class="removeLine">x</span>
+                        </div>
                     </li>
                     <li>
                         <span class="checkBoxLine"></span>
-                        <p>Já ter terminado o curso</p>
-                        <span class="removeLine">x</span>
+                        <div>
+                            <p>Sanduíche</p>
+                            <span class="removeLine">x</span>
+                        </div>
                     </li>
                     <li>
                         <span class="checkBoxLine"></span>
-                        <p>Comprar as coisas pra fazer o jantar em família</p>
-                        <span class="removeLine">x</span>
-                    </li>
-                    <li>
-                        <span class="checkBoxLine"></span>
-                        <p>Passar de ano</p>
-                        <span class="removeLine">x</span>
-                    </li>
-                    <li>
-                        <span class="checkBoxLine"></span>
-                        <p>Conhecer mais pessoas</p>
-                        <span class="removeLine">x</span>
+                        <div>
+                            <p>Tomate, do carros 3</p>
+                            <span class="removeLine">x</span>
+                        </div>
                     </li>
                 </ul>
             </li>
@@ -142,17 +140,15 @@
             <ul class="createdTasksList" id="tasksCreated">
 
             </ul>
-            <input type="button" value="ADD LIST">
+            <input type="button" value="ADD LIST" id="addListBtn">
             
         </form>
         <div class="confirmExitBgContainer" id="confirmExit">
             <div class="confirmExitContainer">
                 <p>Ao sair a lista será resetada!</p>
                 <div>
-                    <input type="button" value="OK">
-                    <input type="button" value="Cancelar">
-                    <!-- <button id="continue">OK</button>
-                    <button id="cancel">Cancelar</button> -->
+                    <input id="confirmExitBtn" type="button" value="OK">
+                    <input id="confirmExitBtn" type="button" value="Cancelar">
                 </div>
             </div>
         </div>

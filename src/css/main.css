@@ -187,7 +187,6 @@ ul {
   color: black;
 }
 .main .listsContainer .containerList ul li {
-  position: relative;
   display: flex;
   align-items: center;
   padding: 10px;
@@ -199,9 +198,14 @@ ul {
   height: 20px;
   margin-right: 15px;
 }
-.main .listsContainer .containerList ul li .removeLine {
-  position: absolute;
-  right: 15px;
+.main .listsContainer .containerList ul li div {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 5px;
+  width: 94%;
+}
+.main .listsContainer .containerList ul li div .removeLine {
   color: gray;
 }
 .main .creatListBtn {
@@ -312,9 +316,10 @@ ul {
 .main .creatListContainer .createdTasksList li {
   display: flex;
   justify-content: space-between;
+  align-items: center;
   color: rgb(99, 99, 99);
   font-size: 1.1em;
-  height: 35px;
+  min-height: 35px;
 }
 .main .creatListContainer .createdTasksList li.remove {
   display: none;
