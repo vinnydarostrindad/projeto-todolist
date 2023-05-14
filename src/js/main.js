@@ -106,6 +106,7 @@ const Main = {
         this.callEvents()
     },
     mainSelectors: function() {
+        this.$listsContainer = document.querySelector('#listsContainer')
         this.$creatListBtn = document.querySelector('#creatListBtn')
         this.$creatListContainer = document.querySelector('#creatListContainer')
         this.$creatListFocus = document.querySelector('#creatListFocus')
@@ -265,14 +266,42 @@ const Main = {
                 this.$inputListLine.placeholder = "Adicione 1 tarefa no mínimo"
                 verification--
             } 
-            if (this.$inputListLine.value != "") {
-                this.$inputListLine.style.color = 'red'
-                verification--
-            }
+
             if (verification == 1) {
                 this.$creatListContainer.classList.remove('showCreatListContainer')
                 this.$creatListFocus.classList.remove('onScreen')
                 this.$html.classList.remove('overflow')
+
+                let listHeader = `
+                <header class="listHeader">
+                    <span class="listCheck"></span>
+                    <h3>${this.$inputListName.value}</h3>
+                    <span class="creatLine">+</span>
+                </header>`
+
+                let listBody = ""
+
+                for (let tasks of this.$tasksCreatedList.children) {
+                    listBody += `
+                    <ul>
+                        <li>
+                            <span class="checkBoxLine"></span>
+                            <div>
+                                <p>
+                                ${tasks.firstChild.textContent}
+                                </p>
+                                <span class="removeLine">x</span>
+                            </div>
+                        </li>
+                    </ul>`
+                }
+                
+                this.$listsContainer.innerHTML += `
+                <li class="containerList">
+                    ${listHeader}
+                    ${listBody}
+                </li>
+                ` 
 
                 this.$inputListName.value = ""
                 this.$inputListLine.value = ""
