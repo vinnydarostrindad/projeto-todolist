@@ -132,6 +132,8 @@ const Main = {
             e.onclick = self.Events.chooseOkCancel_click.bind(self)
         })
         this.$inputListName.onkeypress = self.Events.confirmListName_keypress.bind(this)
+        this.$inputListName.onclick = self.Events.correctEmpty_click
+        this.$inputListLine.onclick = self.Events.correctEmpty_click
         this.$creatTaskBtn.onclick = self.Events.creatTask_click.bind(this) 
         this.$inputListLine.onkeypress = self.Events.creatTask_keypress.bind(this)
         this.$removeTaskCreated.forEach(function(e) {
@@ -153,6 +155,11 @@ const Main = {
                 this.$creatListContainer.classList.remove('showCreatListContainer')
                 this.$creatListFocus.classList.remove('onScreen')
                 this.$html.classList.remove('overflow')
+
+                this.$inputListName.classList.remove('empty')
+                this.$inputListName.placeholder = "Nome da lista"
+                this.$inputListLine.classList.remove('empty')
+                this.$inputListLine.placeholder = "Adicione uma tarefa"
             }
         },
         chooseOkCancel_click: function(e) {   
@@ -170,6 +177,11 @@ const Main = {
                     let listLine = this.$tasksCreatedList.children[0]
                     listLine.remove()
                 }
+
+                this.$inputListName.classList.remove('empty')
+                this.$inputListName.placeholder = "Nome da lista"
+                this.$inputListLine.classList.remove('empty')
+                this.$inputListLine.placeholder = "Adicione uma tarefa"
             }
             this.$confirmExitContainer.classList.remove('appearConfirmExitBg')
         },
@@ -177,6 +189,8 @@ const Main = {
             if (e.key == 'Enter') {
                 if (this.$inputListName.value != "") {
                     this.$inputListLine.focus()
+                    this.$inputListLine.placeholder = 'Adicione uma tarefa'
+                    this.$inputListLine.classList.remove('empty')
                 }
             }
         },
@@ -242,20 +256,44 @@ const Main = {
             let verification = 1
 
             if (this.$inputListName.value == "") {
-                console.log('Coloque um nome')
+                this.$inputListName.classList.add('empty')
+                this.$inputListName.placeholder = "Coloque um nome"
                 verification--
             }
             if (this.$tasksCreatedList.children.length == 0) {
-                console.log('Adicione algo na lista')
+                this.$inputListLine.classList.add('empty')
+                this.$inputListLine.placeholder = "Adicione 1 tarefa no mínimo"
                 verification--
             } 
             if (this.$inputListLine.value != "") {
-                console.log('Deseja colocar ' + this.$inputListLine.value + ' na lista?')
+                this.$inputListLine.style.color = 'red'
+                verification--
             }
             if (verification == 1) {
-                console.log('Tudo certo')
+                this.$creatListContainer.classList.remove('showCreatListContainer')
+                this.$creatListFocus.classList.remove('onScreen')
+                this.$html.classList.remove('overflow')
+
+                this.$inputListName.value = ""
+                this.$inputListLine.value = ""
+                let listLength = this.$tasksCreatedList.children.length
+                for (var i = 0; i < listLength; i++) {
+                    let listLine = this.$tasksCreatedList.children[0]
+                    listLine.remove()
+                }
             }
         
+        },
+        correctEmpty_click: function(e) {
+            let inputIdentifier = e.target.id
+
+            e.target.classList.remove('empty')
+            if (inputIdentifier == 'inputListName') {
+                e.target.placeholder = "Nome da lista"
+            } else {
+                e.target.placeholder = "Adicione uma tarefa"
+                e.target.style.color = ''
+            }
         }
     }
 }

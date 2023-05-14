@@ -312,7 +312,7 @@ ul {
             }
         }
 
-        input[type=text] {
+        .creatListInput {
             border: none;
             outline: none;
             font-size: 1.1em;
@@ -322,6 +322,10 @@ ul {
             &::placeholder {
                 color: $tertiaryColor;
                 font-size: .9em;
+            }
+
+            &.empty::placeholder {
+                color: red;
             }
         }
         

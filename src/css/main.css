@@ -256,20 +256,26 @@ ul {
   margin-right: 5px;
   cursor: pointer;
 }
-.main .creatListContainer input[type=text] {
+.main .creatListContainer .creatListInput {
   border: none;
   outline: none;
   font-size: 1.1em;
   width: 80%;
   height: 100%;
 }
-.main .creatListContainer input[type=text]::-moz-placeholder {
+.main .creatListContainer .creatListInput::-moz-placeholder {
   color: #0052cc;
   font-size: 0.9em;
 }
-.main .creatListContainer input[type=text]::placeholder {
+.main .creatListContainer .creatListInput::placeholder {
   color: #0052cc;
   font-size: 0.9em;
+}
+.main .creatListContainer .creatListInput.empty::-moz-placeholder {
+  color: red;
+}
+.main .creatListContainer .creatListInput.empty::placeholder {
+  color: red;
 }
 .main .creatListContainer h4 {
   font-size: 1.4em;
