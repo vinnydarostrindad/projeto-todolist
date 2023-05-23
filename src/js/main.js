@@ -51,6 +51,7 @@ const Nav = {
     navSelectors: function() {
         this.$explainSite = document.querySelector('#explainSite')
         this.$config = document.querySelector('#config')
+        this.$allLists = document.querySelector('#lists')
         this.$openCloseList = document.querySelectorAll('#openCloseList')
         this.$arrowNavList = document.querySelectorAll('#arrowNavList')
         this.$navList = document.querySelectorAll('#navList')
@@ -58,9 +59,10 @@ const Nav = {
     callEvents: function() {
         const self = this
         
-        this.$explainSite.onclick = this.Events.explainSite_click
-        this.$config.onclick = this.Events.openConfig_click
-
+        this.$explainSite.onclick = self.Events.explainSite_click
+        // this.$config.onclick = self.Events.openConfig_click
+        
+        this.$config.onclick = self.Events.addListAtNav.bind(this)
         this.$openCloseList.forEach(function(e) {
             e.onclick = self.Events.openCloseList_click
         })
@@ -96,6 +98,23 @@ const Nav = {
                 toggleList.classList.toggle('openCloseNavList')
                 listArrow.classList.toggle('openCloseNavListBtn')
             }
+        },
+        addListAtNav: function() {
+            let mainLists = Main.$listsContainer.children
+
+            let allListsLines = []
+            for (let lists of mainLists) {
+                let mainListsLines = lists.lastElementChild.children
+                
+                let listsLines = []
+                for (let lines of mainListsLines) {
+                    listsLines.push(lines.lastElementChild.firstElementChild.innerText)
+                }
+                    
+                allListsLines.push(listsLines)
+            }
+
+            console.log(allListsLines)
         }
     }
 }
@@ -253,7 +272,7 @@ const Main = {
                 }
             }
         },
-        addList_click: function(e) {
+        addList_click: function() {
             let verification = 1
 
             if (this.$inputListName.value == "") {
@@ -263,6 +282,7 @@ const Main = {
             }
             if (this.$tasksCreatedList.children.length == 0) {
                 this.$inputListLine.classList.add('empty')
+                this.$inputListLine.value = ""
                 this.$inputListLine.placeholder = "Adicione 1 tarefa no mínimo"
                 verification--
             } 
@@ -280,28 +300,32 @@ const Main = {
                 </header>`
 
                 let listBody = ""
+                let listTasks = []
 
                 for (let tasks of this.$tasksCreatedList.children) {
                     listBody += `
-                    <ul>
-                        <li>
-                            <span class="checkBoxLine"></span>
-                            <div>
-                                <p>
-                                ${tasks.firstChild.textContent}
-                                </p>
-                                <span class="removeLine">x</span>
-                            </div>
-                        </li>
-                    </ul>`
+                    <li>
+                        <span class="checkBoxLine"></span>
+                        <div>
+                            <p>
+                            ${tasks.firstChild.textContent}
+                            </p>
+                            <span class="removeLine">x</span>
+                        </div>
+                    </li>
+                    `
+
+                    listTasks.push(tasks.firstChild.textContent)
                 }
                 
                 this.$listsContainer.innerHTML += `
                 <li class="containerList">
                     ${listHeader}
-                    ${listBody}
+                    <ul>
+                        ${listBody}
+                    </ul>
                 </li>
-                ` 
+                `
 
                 this.$inputListName.value = ""
                 this.$inputListLine.value = ""

@@ -207,6 +207,7 @@ ul {
 }
 .main .listsContainer .containerList ul li div .removeLine {
   color: gray;
+  margin-right: 6px;
 }
 .main .creatListBtn {
   display: block;
