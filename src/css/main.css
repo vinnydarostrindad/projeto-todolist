@@ -112,9 +112,11 @@ ul {
   background-color: #60b1e2;
   border-radius: 7px;
   text-align: center;
+  cursor: pointer;
 }
 .nav > div img {
   width: 27px;
+  cursor: pointer;
 }
 .nav h2 {
   margin-left: 5px;

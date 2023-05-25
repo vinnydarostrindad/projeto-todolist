@@ -60,9 +60,7 @@ const Nav = {
         const self = this
         
         this.$explainSite.onclick = self.Events.explainSite_click
-        // this.$config.onclick = self.Events.openConfig_click
-        
-        this.$config.onclick = self.Events.addListAtNav.bind(this)
+        this.$config.onclick = self.Events.openConfig_click
         this.$openCloseList.forEach(function(e) {
             e.onclick = self.Events.openCloseList_click
         })
@@ -102,19 +100,54 @@ const Nav = {
         addListAtNav: function() {
             let mainLists = Main.$listsContainer.children
 
-            let allListsLines = []
+            let allListsLines = {}
             for (let lists of mainLists) {
-                let mainListsLines = lists.lastElementChild.children
+                let listName = lists.firstElementChild.children[1].innerText
+                let listLines = lists.lastElementChild.children 
                 
-                let listsLines = []
-                for (let lines of mainListsLines) {
-                    listsLines.push(lines.lastElementChild.firstElementChild.innerText)
+                listLinesArray = []
+                for (let lines of listLines) {
+                    listLinesArray.push(lines.lastElementChild.firstElementChild.innerText)
                 }
                     
-                allListsLines.push(listsLines)
+                allListsLines[listName] = listLinesArray
             }
 
-            console.log(allListsLines)
+            let allNavLists = ""
+            for (let lists in allListsLines) {
+                let listHeader = `
+                <div id="openCloseList">
+                        <img src="src/img/openArrow.svg" alt="abrir" id="arrowNavList"><h3>${lists}</h3>
+                </div>
+                `
+                let bodyLines = ""
+                for (var i = 0; i < allListsLines[lists].length; i++) {
+                    bodyLines += `
+                    <li>
+                        <div class="checkNavList"></div>
+                        ${allListsLines[lists][i]}
+                    </li>
+                    `
+                }
+
+                let listBody = `
+                <ul class="navList" id="navList">
+                        ${bodyLines}
+                </ul>
+                `
+
+                allNavLists += `
+                <li class="list" id="list">
+                    ${listHeader}
+                    ${listBody}
+                </li>
+                `
+            }
+
+            Nav.$allLists.innerHTML = allNavLists
+
+            Nav.navSelectors()
+            Nav.callEvents()
         }
     }
 }
@@ -272,7 +305,7 @@ const Main = {
                 }
             }
         },
-        addList_click: function() {
+        addList_click: function(callback) {
             let verification = 1
 
             if (this.$inputListName.value == "") {
@@ -326,6 +359,8 @@ const Main = {
                     </ul>
                 </li>
                 `
+
+                Nav.Events.addListAtNav()
 
                 this.$inputListName.value = ""
                 this.$inputListLine.value = ""
