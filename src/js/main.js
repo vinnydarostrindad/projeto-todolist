@@ -49,9 +49,9 @@ const Nav = {
         this.callEvents()
     },
     navSelectors: function() {
-        this.$explainSite = document.querySelector('#explainSite')
-        this.$config = document.querySelector('#config')
-        this.$allLists = document.querySelector('#lists')
+        this.$explainSite = document.querySelectorAll('#explainSite')
+        this.$config = document.querySelectorAll('#config')
+        this.$allLists = document.querySelectorAll('#lists')
         this.$openCloseList = document.querySelectorAll('#openCloseList')
         this.$arrowNavList = document.querySelectorAll('#arrowNavList')
         this.$navList = document.querySelectorAll('#navList')
@@ -59,8 +59,12 @@ const Nav = {
     callEvents: function() {
         const self = this
         
-        this.$explainSite.onclick = self.Events.explainSite_click
-        this.$config.onclick = self.Events.openConfig_click
+        this.$explainSite.forEach(function(e) {
+            e.onclick = self.Events.explainSite_click
+        })
+        this.$config.forEach(function(e) {
+            e.onclick = self.Events.openConfig_click
+        })
         this.$openCloseList.forEach(function(e) {
             e.onclick = self.Events.openCloseList_click
         })
@@ -144,7 +148,9 @@ const Nav = {
                 `
             }
 
-            Nav.$allLists.innerHTML = allNavLists
+            Nav.$allLists.forEach(function(e) {
+                e.innerHTML = allNavLists
+            })
 
             Nav.navSelectors()
             Nav.callEvents()

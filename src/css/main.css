@@ -21,10 +21,14 @@ ul {
   list-style: none;
 }
 
+.sideBar {
+  display: none;
+}
+
 /************
 *   HEADER
 *************/
-.header {
+.headerMobile {
   display: flex;
   justify-content: space-evenly;
   align-items: center;
@@ -32,32 +36,32 @@ ul {
   height: 75px;
   text-align: center;
 }
-.header div {
+.headerMobile div {
   text-align: left;
 }
-.header div .avatar {
+.headerMobile div .avatar {
   display: inline-block;
   width: 50px;
   margin-left: 10px;
 }
-.header h1 span {
+.headerMobile h1 span {
   display: flex;
   gap: 2px;
   margin: -17px 0 0 31px;
 }
-.header h1 span img {
+.headerMobile h1 span img {
   width: 24px;
 }
-.header > :nth-child(1n) {
+.headerMobile > :nth-child(1n) {
   width: 110px;
 }
-.header .navButton {
+.headerMobile .navButton {
   border: none;
   background-color: transparent;
   text-align: right;
   margin-right: 10px;
 }
-.header .navBurguer {
+.headerMobile .navBurguer {
   width: 40px;
 }
 
@@ -90,6 +94,7 @@ ul {
   background-color: #7FC8F5;
   padding: 0 5px;
   z-index: 1;
+  overflow: scroll;
   transition: right 200ms ease-in;
 }
 .nav.display {
