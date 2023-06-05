@@ -55,6 +55,7 @@ const Nav = {
         this.$openCloseList = document.querySelectorAll('#openCloseList')
         this.$arrowNavList = document.querySelectorAll('#arrowNavList')
         this.$navList = document.querySelectorAll('#navList')
+        this.$navListCheck = document.querySelectorAll('.checkNavList')
     },
     callEvents: function() {
         const self = this
@@ -127,9 +128,9 @@ const Nav = {
                 let bodyLines = ""
                 for (var i = 0; i < allListsLines[lists].length; i++) {
                     bodyLines += `
-                    <li>
+                    <li class="listLines">
                         <div class="checkNavList"></div>
-                        ${allListsLines[lists][i]}
+                        <p>${allListsLines[lists][i]}</p>
                     </li>
                     `
                 }
@@ -154,6 +155,22 @@ const Nav = {
 
             Nav.navSelectors()
             Nav.callEvents()
+        },
+        checkTaskAtNav: function(taskCheckBox, taskClicked) {
+            Nav.$navListCheck.forEach(function(e) {
+                if (taskCheckBox == "checked") {
+                    if (taskClicked == e.nextElementSibling.innerText) {
+                        e.innerText = '✓'
+                        console.dir(e.nextElementSibling.style)
+                        e.nextElementSibling.style.textDecoration = "line-through 2px"
+                    }
+                } else if (taskCheckBox == "unchecked") {
+                    if (taskClicked == e.nextElementSibling.innerText) {
+                        e.innerText = ''
+                        e.nextElementSibling.style.textDecoration = ""
+                    }
+                }
+            })
         }
     }
 }
@@ -165,12 +182,13 @@ const Main = {
     },
     mainSelectors: function() {
         this.$listsContainer = document.querySelector('#listsContainer')
+        this.$checkbox = document.querySelectorAll('.checkBoxLine')
         this.$creatListBtn = document.querySelector('#creatListBtn')
         this.$creatListContainer = document.querySelector('#creatListContainer')
         this.$creatListFocus = document.querySelector('#creatListFocus')
         this.$html = document.querySelector('html')
         this.$closeCreatListBtn = document.querySelector('#closeCreatList')
-
+        
         this.$inputListName = document.querySelector('#inputListName')
         this.$listName = document.querySelector('#listName')
         this.$creatTaskBtn = document.querySelector('#creatTask')
@@ -199,6 +217,9 @@ const Main = {
             e.onclick = self.Events.removeTaskCreated_click.bind(self)
         })
         this.$addListBtn.onclick = self.Events.addList_click.bind(this)
+        this.$checkbox.forEach(function(e) {
+            e.onclick = self.Events.checkTask_click
+        })
     },
     Events: {
         openCreatNewList_click: function() {
@@ -311,7 +332,7 @@ const Main = {
                 }
             }
         },
-        addList_click: function(callback) {
+        addList_click: function() {
             let verification = 1
 
             if (this.$inputListName.value == "") {
@@ -344,7 +365,9 @@ const Main = {
                 for (let tasks of this.$tasksCreatedList.children) {
                     listBody += `
                     <li>
-                        <span class="checkBoxLine"></span>
+                        <span class="checkBoxLine">
+                            <div class="unchecked"></div>
+                        </span>
                         <div>
                             <p>
                             ${tasks.firstChild.textContent}
@@ -375,6 +398,9 @@ const Main = {
                     let listLine = this.$tasksCreatedList.children[0]
                     listLine.remove()
                 }
+
+                this.mainSelectors()
+                this.callEvents()
             }
         
         },
@@ -388,6 +414,24 @@ const Main = {
                 e.target.placeholder = "Adicione uma tarefa"
                 e.target.style.color = ''
             }
+        },
+        checkTask_click: function(e) {
+            let checkBoxClassList = e.target.firstElementChild.classList
+            let taskClicked = e.target.nextElementSibling.firstElementChild.innerText
+            checkBoxClassList.toggle('checked')
+            let taskCheckBox = ""
+            
+            if (e.target.firstElementChild.classList[1] == "checked") {
+                taskCheckBox = "checked"
+                console.log(e.target.firstElementChild.classList[1])
+                console.log("checked")
+            } else if (e.target.firstElementChild.classList[1] == undefined) {
+                taskCheckBox = "unchecked"
+                console.log(e.target.firstElementChild.classList[1])
+                console.log("unchecked")
+            }
+
+            Nav.Events.checkTaskAtNav(taskCheckBox, taskClicked)
         }
     }
 }

@@ -78,7 +78,7 @@ $primaryFont: 'Nunito', Arial, sans-serif;
             .list {
                 margin-left: 15px;
     
-                div {
+                div#openCloseList {
                     display: flex;
                     gap: 7px;
                     cursor: pointer;
@@ -101,7 +101,12 @@ $primaryFont: 'Nunito', Arial, sans-serif;
                     transition: max-height 400ms ease-in-out;
     
                     &.openCloseNavList {
-                        max-height: 110px;
+                        max-height: fit-content;
+                    }
+
+                    .listLines {
+                        display: flex;
+                        gap: 3px;
                     }
                 }
             }
@@ -134,5 +139,15 @@ $primaryFont: 'Nunito', Arial, sans-serif;
                 margin: 15px 2.5%;
             }
         }
+    }
+}
+
+@media (min-width:1000px) {
+    .sideBar {
+        width: 22%;
+    }
+
+    .main {
+        width: 78%;
     }
 }

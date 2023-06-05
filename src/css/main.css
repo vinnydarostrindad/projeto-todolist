@@ -1,3 +1,4 @@
+@charset "UTF-8";
 @import url("https://fonts.googleapis.com/css2?family=Amatic+SC:wght@400;700&family=Nunito:wght@300;400;700&display=swap");
 * {
   margin: 0;
@@ -129,16 +130,16 @@ ul {
 .nav .lists .list {
   margin-left: 15px;
 }
-.nav .lists .list div {
+.nav .lists .list div#openCloseList {
   display: flex;
   gap: 7px;
   cursor: pointer;
 }
-.nav .lists .list div img {
+.nav .lists .list div#openCloseList img {
   width: 9px;
   transition: all 250ms ease-in-out;
 }
-.nav .lists .list div img.openCloseNavListBtn {
+.nav .lists .list div#openCloseList img.openCloseNavListBtn {
   transform: rotate(90deg);
 }
 .nav .lists .list .navList {
@@ -147,7 +148,12 @@ ul {
   transition: max-height 400ms ease-in-out;
 }
 .nav .lists .list .navList.openCloseNavList {
-  max-height: 110px;
+  max-height: -moz-fit-content;
+  max-height: fit-content;
+}
+.nav .lists .list .navList .listLines {
+  display: flex;
+  gap: 3px;
 }
 
 /**********
@@ -200,10 +206,29 @@ ul {
   border-top: 1px solid #62abe7;
 }
 .main .listsContainer .containerList ul li .checkBoxLine {
+  position: relative;
+  background-color: #62abe7;
   border: 2px solid #62abe7;
   width: 20px;
   height: 20px;
   margin-right: 15px;
+}
+.main .listsContainer .containerList ul li .checkBoxLine::after {
+  position: absolute;
+  top: -6px;
+  content: "✓";
+  color: #fff;
+  font-size: 1.2em;
+  font-weight: bold;
+}
+.main .listsContainer .containerList ul li .checkBoxLine .unchecked {
+  background-color: #fff;
+  width: 100%;
+  height: 100%;
+  transition: background-color 500ms;
+}
+.main .listsContainer .containerList ul li .checkBoxLine .unchecked.checked {
+  background-color: #62abe7;
 }
 .main .listsContainer .containerList ul li div {
   display: flex;
@@ -307,14 +332,14 @@ ul {
 .main .creatListContainer .listName input {
   color: #0052cc;
 }
-.main .creatListContainer .listTask {
+.main .creatListContainer .createdTasksList .listTask {
   display: flex;
   align-items: center;
   gap: 10px;
   height: 35px;
   margin-bottom: 4px;
 }
-.main .creatListContainer .listTask span {
+.main .creatListContainer .createdTasksList .listTask span {
   font-size: 2.15em;
   font-weight: 300;
   text-align: center;
@@ -326,6 +351,7 @@ ul {
 }
 .main .creatListContainer .createdTasksList :last-child {
   padding-bottom: 8px;
+  cursor: pointer;
 }
 .main .creatListContainer .createdTasksList li {
   display: flex;

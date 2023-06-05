@@ -155,7 +155,7 @@ ul {
         .list {
             margin-left: 15px;
 
-            div {
+            div#openCloseList {
                 display: flex;
                 gap: 7px;
                 cursor: pointer;
@@ -173,12 +173,16 @@ ul {
             .navList {
                 max-height: 0px;
                 overflow: hidden;
-                
 
                 transition: max-height 400ms ease-in-out;
 
                 &.openCloseNavList {
-                    max-height: 110px;
+                    max-height: fit-content;
+                }
+
+                .listLines {
+                    display: flex;
+                    gap: 3px;
                 }
             }
         }
@@ -243,12 +247,35 @@ ul {
                     border-top: 1px solid $secundaryColor;
                     
                     .checkBoxLine {
+                        position: relative;
+                        background-color: $secundaryColor;
                         border: 2px solid $secundaryColor;
                         width: 20px;
                         height: 20px;
                         margin-right: 15px;
-                    }
 
+                        &::after {
+                            position: absolute;
+                            top: -6px;
+                            content: '✓';
+                            color: #fff;
+                            font-size: 1.2em;
+                            font-weight: bold;
+                            
+                        }
+
+                        .unchecked {
+                            background-color: #fff;
+                            width: 100%;
+                            height: 100%;
+                            transition: background-color 500ms;
+
+                            &.checked {
+                                background-color: $secundaryColor;
+                            }
+                        }
+                    }
+                    
                     div {
                         display: flex;
                         justify-content: space-between;
@@ -363,7 +390,7 @@ ul {
                 color: $tertiaryColor;
             }
         }
- 
+ .createdTasksList
         .listTask {
             display: flex;
             align-items: center;
@@ -385,6 +412,7 @@ ul {
 
             :last-child {
                 padding-bottom: 8px;
+                cursor: pointer;
             }
 
             li {

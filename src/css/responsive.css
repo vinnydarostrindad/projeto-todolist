@@ -61,16 +61,16 @@
   .sideBar .lists .list {
     margin-left: 15px;
   }
-  .sideBar .lists .list div {
+  .sideBar .lists .list div#openCloseList {
     display: flex;
     gap: 7px;
     cursor: pointer;
   }
-  .sideBar .lists .list div img {
+  .sideBar .lists .list div#openCloseList img {
     width: 9px;
     transition: all 250ms ease-in-out;
   }
-  .sideBar .lists .list div img.openCloseNavListBtn {
+  .sideBar .lists .list div#openCloseList img.openCloseNavListBtn {
     transform: rotate(90deg);
   }
   .sideBar .lists .list .navList {
@@ -79,7 +79,12 @@
     transition: max-height 400ms ease-in-out;
   }
   .sideBar .lists .list .navList.openCloseNavList {
-    max-height: 110px;
+    max-height: -moz-fit-content;
+    max-height: fit-content;
+  }
+  .sideBar .lists .list .navList .listLines {
+    display: flex;
+    gap: 3px;
   }
   .main {
     width: 70%;
@@ -102,5 +107,13 @@
     height: 100%;
     width: 45%;
     margin: 15px 2.5%;
+  }
+}
+@media (min-width: 1000px) {
+  .sideBar {
+    width: 22%;
+  }
+  .main {
+    width: 78%;
   }
 }/*# sourceMappingURL=responsive.css.map */
