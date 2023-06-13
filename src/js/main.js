@@ -1,3 +1,5 @@
+let AllLists = []
+
 const Header = {
     setup: function() {
         this.headerSelectors()
@@ -70,68 +72,98 @@ const Nav = {
             e.onclick = self.Events.openCloseList_click
         })
     },
-    getNavListHtml: function(allListsLines) {
-        for (let lists in allListsLines) {
-            let listHeader = `
+    buildNavListHtml: function() {
+        let allNavLists = ""
+
+        for (var i = 0; i < AllLists.length; i++) {
+            const listHeader = `
                 <div id="openCloseList">
-                        <img src="src/img/openArrow.svg" alt="abrir" id="arrowNavList"><h3>${lists}</h3>
+                        <img src="src/img/openArrow.svg" alt="abrir" id="arrowNavList">
+                        <h3>${AllLists[i].name}</h3>
                 </div>
             `
+
             let bodyLines = ""
-            for (var i = 0; i < allListsLines[lists].length; i++) {
+            for (var task = 0; task < AllLists[i].tasks.length; task++) {
                 bodyLines += `
-                    <li class="listLines">
-                        <div class="checkNavList"></div>
-                        <p>${allListsLines[lists][i]}</p>
-                    </li>
+                <li class="listLines">
+                    <div class="checkNavList"></div>
+                    <p>${AllLists[i].tasks[task].task}</p>
+                </li>
                 `
             }
 
             let listBody = `
-                <ul class="navList" id="navList">
+            <ul class="navList" id="navList">
                     ${bodyLines}
-                </ul>
+            </ul>
             `
 
-            const list = `
-                <li class="list" id="list">
-                    ${listHeader}
-                    ${listBody}
-                </li>
+            allNavLists += `
+            <li class="list" id="list">
+                ${listHeader}
+                ${listBody}
+            </li>
             `
-
-            return list;
         }
+
+        return allNavLists;
     },
     addListAtNav: function() {
-        let mainLists = Main.$listsContainer.children
+            const allNavLists = this.buildNavListHtml()
 
-        let allListsLines = {}
-        for (let lists of mainLists) {
-            let listName = lists.firstElementChild.children[1].innerText
-            let listLines = lists.lastElementChild.children 
-            
-            listLinesArray = []
-            for (let lines of listLines) {
-                listLinesArray.push(lines.lastElementChild.firstElementChild.innerText)
+            Nav.$allLists.forEach(function(e) {
+                e.innerHTML = allNavLists
+            })
+
+            Nav.navSelectors()
+            Nav.callEvents()
+    },
+    checkTaskAtNav: function() {
+            Nav.$navListCheck.forEach(function(e) {
+                const listTask = e.nextElementSibling.innerText
+
+                for (let list in AllLists) {
+                    for (let task in AllLists[list].tasks) {
+                        console.log(AllLists[list].tasks[task].task)
+                        console.log(AllLists[list].tasks[task].done)
+                        const listDoneValue = AllLists[list].tasks[task].done
+
+                        if(listTask == AllLists[list].tasks[task].task) {
+                            if (listDoneValue == true) {
+                                e.innerText = '✓'
+                                e.nextElementSibling.style.textDecoration = "line-through 2px"
+                            } else {
+                                e.innerText = ''
+                                e.nextElementSibling.style.textDecoration = ""
+                            }
+                        }
+                        console.log(AllLists)
+                    }  
+                }
+            })
+    },
+    checkCheckedTasksNav: function () {
+        
+        this.$navList.forEach(lists => {
+            const listTasks = lists.children
+            for (let i = 0; i < listTasks.length; i++) {
+                const listTask = listTasks[i].lastElementChild.innerText
+                const listTaskCheckBox = listTasks[i].firstElementChild
+
+                for (let list in AllLists) {
+                    for (let task in AllLists[list].tasks) {
+                        if (listTask == AllLists[list].tasks[task].task) {
+                            if (AllLists[list].tasks[task].done == true) {
+                                listTaskCheckBox.innerText = '✓'
+                                listTaskCheckBox.nextElementSibling.style.textDecoration = "line-through 2px"
+                            }
+                        }
+                    }  
+                }
             }
-                
-            allListsLines[listName] = listLinesArray
-        }
-
-        const allNavLists = this.getNavListHtml(allListsLines)
-
-        Nav.$allLists.forEach(function(e) {
-            e.innerHTML = allNavLists
         })
-
-        Nav.navSelectors()
-        Nav.callEvents()
     },
-    buildNavLists: function(list) {
-        // console.log(list)
-    },
-    
     Events: {
         explainSite_click: function() {
             alert('Faz listas')
@@ -149,7 +181,7 @@ const Nav = {
                 toggleList.classList.toggle('openCloseNavList')
 
                 if (elementClicked == 'H3') {
-                    const listArrow = e.srcElement.previousSibling
+                    const listArrow = e.srcElement.previousElementSibling
                     
                     listArrow.classList.toggle('openCloseNavListBtn')
                 } else {
@@ -162,28 +194,11 @@ const Nav = {
                 toggleList.classList.toggle('openCloseNavList')
                 listArrow.classList.toggle('openCloseNavListBtn')
             }
-        },
-        checkTaskAtNav: function(taskCheckBox, taskClicked) {
-            Nav.$navListCheck.forEach(function(e) {
-                if (taskCheckBox == "checked") {
-                    if (taskClicked == e.nextElementSibling.innerText) {
-                        e.innerText = '✓'
-                        e.nextElementSibling.style.textDecoration = "line-through 2px"
-                    }
-                } else if (taskCheckBox == "unchecked") {
-                    if (taskClicked == e.nextElementSibling.innerText) {
-                        e.innerText = ''
-                        e.nextElementSibling.style.textDecoration = ""
-                    }
-                }
-            })
         }
     }
 }
 
 const Main = {
-    lists: [],
-
     setup:  function() {
         this.mainSelectors()
         this.callEvents()
@@ -229,75 +244,70 @@ const Main = {
             e.onclick = self.Events.checkTask_click
         })
     },
-    getMainListHtml: function(listName, listTasks, localStorage = false) {
-        let listHeader = `
+    buildMainListHtml: function() { 
+        let list =''
+
+        for (var i = 0; i < AllLists.length; i++) {
+            const listHeader = `
                 <header class="listHeader">
                     <span class="listCheck"></span>
-                    <h3>${listName}</h3>
+                    <h3>${AllLists[i].name}</h3>
                     <span class="creatLine">+</span>
-                </header>`
+                </header>
+            `
 
-                let listBody = ""
+            let listBody = ''
+            for (var task = 0; task < AllLists[i].tasks.length; task++) {
+                listBody += `
+                    <li>
+                        <span class="checkBoxLine">
+                            <div class="unchecked"></div>
+                        </span>
+                        <div>
+                            <p>
+                            ${AllLists[i].tasks[task].task}
+                            </p>
+                            <span class="removeLine">x</span>
+                        </div>
+                    </li>
+                `
+            }
 
-                if (localStorage == true) {
-                    for (var i = 0; i < listTasks.length; i++) {
-                        listBody += `
-                        <li data-task='${listTasks[i]}'>
-                            <span class="checkBoxLine">
-                                <div class="unchecked"></div>
-                            </span>
-                            <div>
-                                <p>
-                                    ${listTasks[i]}
-                                </p>
-                                <span class="removeLine">x</span>
-                            </div>
-                        </li>
-                        `
-                    }
-                } else {
-                    for (let tasks of this.$tasksCreatedList.children) {
-                        listBody += `
-                        <li data-task='${tasks.firstChild.textContent}'>
-                            <span class="checkBoxLine">
-                                <div class="unchecked"></div>
-                            </span>
-                            <div>
-                                <p>
-                                    ${tasks.firstChild.textContent}
-                                </p>
-                                <span class="removeLine">x</span>
-                            </div>
-                        </li>
-                        `
-                            
-                        listTasks.push(tasks.firstChild.textContent)
-                    }
-                }
-                
-                const list = `
+            list += `
                 <li class="containerList">
                     ${listHeader}
                     <ul>
                         ${listBody}
                     </ul>
                 </li>
-                `
-                return [list, listTasks];
+            `
+        }
+            
+        
+        return list;
     },
-    buildMainLists: function(lists) {
-        this.lists = lists
+    addLocalStorageList: function () {
+        this.$listsContainer.innerHTML = this.buildMainListHtml()
 
-        lists.forEach(list => {
-            const listName = list.name
-            const listTasks = list.tasks
+        this.mainSelectors()
+        this.callEvents()
+    }, 
+    checkCheckedTasksMain: function () {
+        this.$checkbox.forEach(checkBox => {
+            const listTask = checkBox.parentElement.lastElementChild.firstElementChild.innerText
 
-            const lists = this.getMainListHtml(listName, listTasks, true)
-
-            this.$listsContainer.innerHTML += lists[0]
+            for (let list in AllLists) {
+                for (var i = 0; i < AllLists[list].tasks.length; i++) {
+                    if (listTask == AllLists[list].tasks[i].task) {
+                        if (AllLists[list].tasks[i].done == true) {
+                            checkBox.firstElementChild.classList.add('checked')
+                        }
+                    }
+                }  
+            }
+            
         })
     },
-
     Events: {
         openCreatNewList_click: function() {
             this.$creatListContainer.classList.add('showCreatListContainer')
@@ -423,17 +433,23 @@ const Main = {
                 this.$inputListLine.placeholder = "Adicione 1 tarefa no mínimo"
                 verification--
             } 
-            
+
             if (verification == 1) {
                 this.$creatListContainer.classList.remove('showCreatListContainer')
                 this.$creatListFocus.classList.remove('onScreen')
                 this.$html.classList.remove('overflow')
-                
-                const listName = this.$inputListName.value
-                let listTasks = []
 
-                const listInfo = this.getMainListHtml(listName, listTasks)
-                this.$listsContainer.innerHTML += listInfo[0]
+                let listTasks = []
+                for (let task of this.$tasksCreatedList.children) {
+                    const taskConfig = {task: task.firstElementChild.innerText, done: false}
+                    listTasks.push(taskConfig)
+                }
+                AllLists.push({name: this.$inputListName.value, tasks: 
+                listTasks})
+
+                LocalStorage.saveLists()
+                
+                this.$listsContainer.innerHTML = this.buildMainListHtml()
 
                 Nav.addListAtNav()
 
@@ -443,19 +459,11 @@ const Main = {
                 for (var i = 0; i < listLength; i++) {
                     let listLine = this.$tasksCreatedList.children[0]
                     listLine.remove()
-                }
-
-                this.lists.push({name: listName, tasks: listTasks})
-                console.log(this.lists)
-
-                const jsonLists = JSON.stringify(this.lists)
-
-                localStorage.setItem('lists', jsonLists)
-
-                this.mainSelectors()
-                this.callEvents()
+                }                  
             }
-        
+
+            this.mainSelectors()
+            this.callEvents()
         },
         correctEmpty_click: function(e) {
             let inputIdentifier = e.target.id
@@ -471,34 +479,47 @@ const Main = {
         checkTask_click: function(e) {
             let checkBoxClassList = e.target.firstElementChild.classList
             let taskClicked = e.target.nextElementSibling.firstElementChild.innerText
+
             checkBoxClassList.toggle('checked')
-            let taskCheckBox = ""
-            
-            if (e.target.firstElementChild.classList[1] == "checked") {
-                taskCheckBox = "checked"
-            } else if (e.target.firstElementChild.classList[1] == undefined) {
-                taskCheckBox = "unchecked"
+
+            for (var list in AllLists) {
+                for (var task in AllLists[list].tasks) {
+                    if (taskClicked == AllLists[list].tasks[task].task) {
+                        if (checkBoxClassList.contains('checked')) {
+                            AllLists[list].tasks[task].done = true
+                        } else {
+                            AllLists[list].tasks[task].done = false
+                        }
+                    }
+                }
             }
 
-            Nav.Events.checkTaskAtNav(taskCheckBox, taskClicked)
+            LocalStorage.saveLists()
+
+            Nav.checkTaskAtNav()
         }
     }
 }
 
 const LocalStorage = {
-    setup: function() {
-        this.getLists()
-    },  
-    getLists: function() {
-        const listsJson = localStorage.getItem('lists')
-        const listsArr = JSON.parse(listsJson)
+    backupLists: function() {
+        AllLists = JSON.parse(localStorage.getItem('lists'))
 
-        Main.buildMainLists(listsArr)
-        // Nav.buildNavLists(listsArr)
+        if (AllLists) {
+            Main.addLocalStorageList()
+            Main.checkCheckedTasksMain()
+            Nav.addListAtNav()
+            Nav.checkCheckedTasksNav()
+        } else {
+            localStorage.setItem('lists', JSON.stringify([]))
+        }
+    },
+    saveLists: function() {
+        localStorage.setItem('lists' ,JSON.stringify(AllLists))
     }
 }
 
 Header.setup()
 Nav.setup()
 Main.setup()
-LocalStorage.setup()
+LocalStorage.backupLists()
