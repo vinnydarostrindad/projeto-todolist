@@ -512,11 +512,13 @@ const LocalStorage = {
             Nav.checkCheckedTasksNav()
         } else {
             localStorage.setItem('lists', JSON.stringify([]))
+            AllLists = JSON.parse(localStorage.getItem('lists'))
         }
     },
     saveLists: function() {
         localStorage.setItem('lists' ,JSON.stringify(AllLists))
     }
+    
 }
 
 Header.setup()
